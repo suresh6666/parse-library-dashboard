@@ -8,7 +8,7 @@ var ParseDashboard = require('parse-dashboard');
 var Parse = require('parse/node');
 Parse.initialize("myAppId");
 Parse.serverURL = 'http://localhost:1337/parse';
-var databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI;
+var databaseUri = process.env.DATABASE_URI || 'mongodb://ds059634.mlab.com:59634/dev';
 
 if (!databaseUri) {
   console.log('DATABASE_URI not specified, falling back to localhost.');
@@ -21,7 +21,7 @@ var api = new ParseServer({
   masterKey: process.env.MASTER_KEY || 'hello_master', //Add your master key here. Keep it secret!
   serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
   liveQuery: {
-    classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
+    classNames: [] // List of classes to support for query subscriptions
   }
 });
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
