@@ -8,14 +8,14 @@ var ParseDashboard = require('parse-dashboard');
 var Parse = require('parse/node');
 Parse.initialize("myAppId");
 Parse.serverURL = 'http://localhost:1337/parse';
-var databaseUri = 'mongodb://ds059634.mlab.com:59634/dev';
+var databaseUri = 'mongodb://ds059634.mlab.com:59634/parse';
 
 if (!databaseUri) {
   console.log('DATABASE_URI not specified, falling back to localhost.');
 }
 
 var api = new ParseServer({
-  databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
+  databaseURI: databaseUri || 'mongodb://localhost:27017/parse',
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
   appId: process.env.APP_ID || 'myAppId',
   masterKey: process.env.MASTER_KEY || 'hello_master', //Add your master key here. Keep it secret!
@@ -69,6 +69,10 @@ app.get('/mytest', function (req, res) {
 // Remove this before launching your app
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '/public/index.html'));
+});
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
 var port = process.env.PORT || 1337;
