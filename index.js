@@ -75,7 +75,7 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
-var port = process.env.PORT || 8090;
+var port = process.env.PORT || 8020;
 var httpServer = require('http').createServer(app);
 httpServer.listen(port, function() {
     console.log('parse-server-example running on port ' + port + '.');
